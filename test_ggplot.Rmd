@@ -1,0 +1,47 @@
+---
+title: "GGPLOT presentation"
+author: "ANLY 599 NAME"
+output:
+  revealjs::revealjs_presentation:
+    theme: sky
+---
+
+```{r include=FALSE}
+library(viridis)
+library(ggplot2)
+library(plotly)
+```
+
+## Test
+
+```{r}
+test = read.csv("../Downloads/data_by_artist.csv")
+```
+
+## Theme
+
+```{r}
+## theme
+newtheme <- theme_bw() + 
+  theme(plot.title = element_text(family = "Times", face= "bold", size = "20" ,color = "darkred", hjust = 0.5)) +
+  theme(plot.subtitle = element_text(family = "Times")) +
+  theme(plot.caption = element_text(family = "Times", hjust = 0.5)) +
+  theme(plot.background = element_rect(fill = "grey85")) +
+  theme(panel.background = element_rect(fill = "grey95")) +
+  theme(panel.border = element_rect(color = "steelblue", size = 2))
+```
+
+## Basic plot
+
+```{r echo=FALSE}
+ggplot(data = test, aes(liveness, popularity)) + 
+  geom_point() + 
+  labs(
+    title = "Spotify Data",
+    subtitle = "liveliness vs popularity facetted by mode",
+    caption = "Figure 1: Most of the points are clustered in the bottom left of the graph"
+  ) +
+  facet_wrap(~mode) +
+  newtheme
+```
+
