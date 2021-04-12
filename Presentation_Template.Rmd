@@ -1,0 +1,84 @@
+---
+title: "GGPLOT presentation"
+author: "ANLY 599"
+output:
+  revealjs::revealjs_presentation:
+    theme: sky
+---
+
+```{r include=FALSE}
+library(viridis)
+library(ggplot2)
+library(plotly)
+library(faraway)
+```
+
+The viridis package contains four color palettes, revelaed in the plots that follow.
+
+>- Veridis
+>- Magma
+>- Inferno
+>- Plasma
+
+Each plot displays a contour map of the mangua Whau volcano in Auckland, New Zealand
+
+## Viridis colors
+```{r}
+image(volcano, col = viridis(200))
+```
+
+```{r include = FALSE}
+## theme
+newtheme <- theme_bw() + 
+  theme(plot.title = element_text(family = "Times", face= "bold", size = "20" ,color = "darkred", hjust = 0.5)) +
+  theme(plot.subtitle = element_text(family = "Times")) +
+  theme(plot.caption = element_text(family = "Times", hjust = 0.5)) +
+  theme(plot.background = element_rect(fill = "grey85")) +
+  theme(panel.background = element_rect(fill = "grey95")) +
+  theme(panel.border = element_rect(color = "steelblue", size = 2))
+```
+
+## World cup
+
+```{r echo=FALSE}
+ggplot(data = worldcup, aes(Time, Shots)) + 
+  geom_point() + 
+  labs(
+    title = "World Cup Data",
+    subtitle = "Shots over time",
+    caption = "Figure 1: Most of the points are clustered in the bottom left of the graph"
+  ) +
+  newtheme
+```
+
+## World cup Interactive
+
+```{r echo = FALSE}
+no_facet <- ggplot(data = worldcup, aes(Time, Shots)) + 
+  geom_point() + 
+  labs(
+    title = "World Cup Data",
+    subtitle = "Shots over time",
+    caption = "Figure 1: Most of the points are clustered in the bottom left of the graph"
+  ) +
+  newtheme
+
+ggplotly(no_facet)
+```
+
+## World cup Interactive Facet
+
+```{r echo = FALSE}
+facet_gg = ggplot(data = worldcup, aes(Time, Shots)) + 
+  geom_point() + 
+  facet_wrap(facets = ~ Position, ncol = 2) + 
+  labs(
+    title = "World Cup Data",
+    subtitle = "Shots over time",
+    caption = "Figure 2: Most of the points are clustered in the bottom left of the graph"
+  ) +
+  newtheme
+
+ggplotly(facet_gg)
+```
+
