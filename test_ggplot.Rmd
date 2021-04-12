@@ -15,11 +15,12 @@ library(plotly)
 ## Test
 
 ```{r}
-test = read.csv("../Downloads/data_by_artist.csv")
+test = read.csv("./data_by_artist.csv")
 ```
 
 ## Theme
 
+To edit by students
 ```{r}
 ## theme
 newtheme <- theme_bw() + 
@@ -33,6 +34,7 @@ newtheme <- theme_bw() +
 
 ## Basic plot
 
+To edit by students
 ```{r echo=FALSE}
 ggplot(data = test, aes(liveness, popularity)) + 
   geom_point() + 
